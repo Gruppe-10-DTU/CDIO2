@@ -25,9 +25,8 @@ public class DiceHolder {
     }
 
     //Iterate over each die, roll it, and assign the rolls to an array for stats checking.
-    public int[] roll() {
+    public void roll() {
         rollDie();
-        return rolls;
     }
 
     //private method for rolling the dice
