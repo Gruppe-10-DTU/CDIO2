@@ -2,7 +2,7 @@ package game;
 
 public class Player {
 
-    private int money = 1000;
+    private final Balance balance = new Balance();
     private String identifier;
 
     //Constructor
@@ -11,12 +11,11 @@ public class Player {
     }
 
     // getter
-    public int getMoney() {
-        return money;
+    public int getBalance() {
+        return balance.getBalance();
     }
     // setter
-    public void setMoney(int newMoney) {
-        this.money = newMoney;
+    public void setBalance(int newBalance) {balance.setBalance(balance.getBalance() + newBalance);
     }
 
     // getter
