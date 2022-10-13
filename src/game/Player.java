@@ -15,7 +15,9 @@ public class Player {
         return balance.getBalance();
     }
     // setter
-    public void setBalance(int newBalance) {balance.setBalance(balance.getBalance() + newBalance);
+    public void setBalance(int newBalance) {
+        int newValue = balance.getBalance() + newBalance;
+        balance.setBalance(Math.max(newValue, 0));
     }
 
     // getter
