@@ -11,4 +11,7 @@ public class Balance {
         balance = newValue;
     }
 
+    public boolean checkBalance(){
+        return balance < 0;
+    }
 }
