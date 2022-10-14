@@ -12,18 +12,13 @@ fieldName6=Byen med den store mur
 field6=Du gik ind i byen med den store mur og tjente 180,- ved at sælge urter du har fundet på vejen
 fieldName7=Klosteret
 field7=Du tilbragte natten i klosteret, du føler dig udhvilet og klat til nye eventyr
-
-fieldName8=Black cave
-field8=You went into the black cave and were attacked by bandits you made it out, but you lost 70,-
-fieldName9=Huts in the mountain
-field9=While staying in the huts in the mountain you are able to find truffles and make 60,- selling them to the locals
-fieldName10=The Werewall
-field10=At the warewall you are inlisted to help fight off the werewolfs, you pay 80,- to get out of it and hurry on out of there. You get an extra turn
-fieldName11=The pit
-field11=You are caught stealing and thrown in the pit, you have to pay 50,- to settle your debt
-fieldName12=Goldmine
-field12=You came across a chest filled with gold, you gain 650,- hopefully the rightful owner doesn’t find you
-
-
-
-
+fieldName8=Den sorte hule
+field8=Du gik ind i den sorte hule og blev overfaldet af banditter, du slap væk men mistede 70,-
+fieldName9=Bjerghytterne
+field9=Under dit ophold i bjerghytterne er du heldig og finder trøfler, du sælger dem til de lokale og tjener 60,-
+fieldName10=Varevægen
+field10=Ved Varevæggen bliver du bedt om at hjælpe med at kæmpe mod vareulvene, du betaler 80,- for at slippe for det og skynder dig væk. Du får en ekstra tur.
+fieldName11=Hullet
+field11=Du er blevet taget i at stjæle og smidt i hullet, du betaler 50,- i erstatning
+fieldName12=Guldminen
+field12=Du fandt en kiste fyldt med guld og får 650,- forhåbentlig finder den retmæssige ejer dig ikke
