@@ -1,4 +1,4 @@
-package game;
+package game.models;
 
 public class Balance {
     private int balance = 1000;

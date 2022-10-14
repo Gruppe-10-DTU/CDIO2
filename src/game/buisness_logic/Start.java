@@ -1,8 +1,8 @@
-package game;
+package game.buisness_logic;
 
 public class Start {
     public static void main(String[] args) {
-        Game miniMonopoly = new Game("en");
+        GameController miniMonopoly = new GameController("en");
         miniMonopoly.play();
     }
 }

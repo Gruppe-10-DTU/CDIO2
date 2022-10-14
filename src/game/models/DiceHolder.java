@@ -1,4 +1,4 @@
-package game;
+package game.models;
 
 import java.util.Arrays;
 
@@ -14,7 +14,7 @@ public class DiceHolder {
         rolls = new int[2];
     }
 
-    public int[] getRolls(){return rolls}
+    public int[] getRolls(){return rolls;}
 
     //Constructor with n amount of dice, in case customer wants to change the game
     public DiceHolder(int diceAmt) {
