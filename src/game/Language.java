@@ -8,12 +8,20 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class Languish {
+public class Language {
 
     private HashMap<String, String> languageValues;
 
-    public Languish() {
-        Path path = Paths.get("/Users/sandie/Documents/DTU/CDIO2/src/game/english.txt");
+    public Language() {
+        updateLanguage("src/game/english.txt");
+    }
+
+    public String getLanguageValue(String key) {
+        return languageValues.get(key);
+    }
+
+    public void updateLanguage(String language) {
+        Path path = Paths.get(language);
         languageValues = new HashMap<String, String>();
 
         try {
@@ -29,17 +37,13 @@ public class Languish {
         }
     }
 
-    public String getLanguageValue(String key) {
-        return languageValues.get(key);
-    }
-
     public static void main(String Args[]) {
         System.out.println("Program starts here");
 
-        Languish currentLanguish = new Languish();
-        System.out.println(currentLanguish.getLanguageValue("field2"));
-
-
+        Language currentLanguage = new Language();
+        System.out.println(currentLanguage.getLanguageValue("field2"));
+        currentLanguage.updateLanguage("src/game/danish.txt");
+        System.out.println(currentLanguage.getLanguageValue("field2"));
 
     }
 
