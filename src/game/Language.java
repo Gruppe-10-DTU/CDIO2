@@ -16,14 +16,21 @@ public class Language {
         updateLanguage("src/game/english.txt");
     }
 
-    public String getLanguageValue(String key) {
-        return languageValues.get(key);
+    //Returns the value to the requestes key, kan add extra string if the value includes {0}
+    public String getLanguageValue(String key, String...txt) {
+        if(txt.length>0) {
+            String value = languageValues.get(key);
+            value = value.replace("{0}", txt[0]);
+            return value;
+        } else {
+            return languageValues.get(key);
+        }
     }
 
+    //Updates the language
     public void updateLanguage(String language) {
         Path path = Paths.get(language);
         languageValues = new HashMap<String, String>();
-
         try {
             List<String> lines = Files.readAllLines(path);
             for(String line : lines) {
@@ -33,7 +40,6 @@ public class Language {
                 }
             }
         } catch (IOException e) {
-
         }
     }
 
@@ -41,9 +47,9 @@ public class Language {
         System.out.println("Program starts here");
 
         Language currentLanguage = new Language();
-        System.out.println(currentLanguage.getLanguageValue("field2"));
-        currentLanguage.updateLanguage("src/game/danish.txt");
-        System.out.println(currentLanguage.getLanguageValue("field2"));
+        System.out.println(currentLanguage.getLanguageValue("field2", "500"));
+        //currentLanguage.updateLanguage("src/game/danish.txt");
+        //System.out.println(currentLanguage.getLanguageValue("field2"));
 
     }
 
