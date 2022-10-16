@@ -1,4 +1,4 @@
-package game.buisness_logic;
+package game.business_logic;
 
 import game.models.*;
 
