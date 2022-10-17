@@ -1,7 +1,7 @@
-package game.buisness_logic;
+package game.controllers;
 
 import game.models.*;
-import game.ui.Game;
+import game.ui.GUI;
 
 public class GameController {
     private final Player[] players = new Player[2];
@@ -9,7 +9,7 @@ public class GameController {
     DiceHolder diceHolder = new DiceHolder();
     private GUIConverter guiConverter;
 
-    Game game;
+    GUI GUI;
     /*
     Not implemented yet but will be needed
     Language language;
@@ -21,7 +21,7 @@ public class GameController {
         for (int i = 0; i < effects.length; i++) {
             fields[i] = new Field(effects[i], "Field " + i+2);
         }
-        game = new Game(guiConverter.fieldToGui(fields), guiConverter.playerToGUI(players));
+        GUI = new GUI(guiConverter.fieldToGui(fields), guiConverter.playerToGUI(players));
     }
     public void play() {
         //Variables for core loop
@@ -50,19 +50,18 @@ public class GameController {
     private Player turn(Player player){
         System.out.println(player.getIdentifier() + "s turn");
         diceHolder.roll();
-        game.showDice(diceHolder.getRolls());
-        game.movePlayer(player.getIdentifier(), diceHolder.sum() - 2);
+        GUI.showDice(diceHolder.getRolls());
+        GUI.movePlayer(player.getIdentifier(), diceHolder.sum() - 2);
         //Set the players new balance based on the fields effect
         //sum - 2 since 1, there's only 11 fields but you can roll two and arrays are 0-indexed so it goes 0-10
         player.setBalance(fields[diceHolder.sum()-2].getEffect());
-        game.updatePlayer(player.getIdentifier(), player.getBalance());
+        GUI.updatePlayer(player.getIdentifier(), player.getBalance());
         try {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        game.RemovePlayer(diceHolder.sum()-2);
+        GUI.RemovePlayer(diceHolder.sum()-2);
         return player;
     }
-
 }

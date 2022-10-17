@@ -1,4 +1,4 @@
-package game.buisness_logic;
+package game.controllers;
 
 public class Start {
     public static void main(String[] args) {

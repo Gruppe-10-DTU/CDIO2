@@ -1,4 +1,4 @@
-package game.buisness_logic;
+package game.controllers;
 
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
