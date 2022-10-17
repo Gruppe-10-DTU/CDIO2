@@ -1,11 +1,15 @@
 package game.buisness_logic;
 
 import game.models.*;
+import game.ui.Game;
 
 public class GameController {
     private final Player[] players = new Player[2];
     Field[] fields = new Field[11];
     DiceHolder diceHolder = new DiceHolder();
+    private GUIConverter guiConverter;
+
+    Game game;
     /*
     Not implemented yet but will be needed
     Language language;
@@ -17,6 +21,7 @@ public class GameController {
         for (int i = 0; i < effects.length; i++) {
             fields[i] = new Field(effects[i], "Field " + i+2);
         }
+        game = new Game(guiConverter.fieldToGui(fields), guiConverter.playerToGUI(players));
     }
     public void play() {
         //Variables for core loop
@@ -24,7 +29,9 @@ public class GameController {
         int turn = 0;
         //Main game logic
         while(!win){
+
             turn(players[turn % 2]);
+
             if(players[turn % 2].getBalance() >= 3000){
                 win = true;
             }
@@ -43,23 +50,19 @@ public class GameController {
     private Player turn(Player player){
         System.out.println(player.getIdentifier() + "s turn");
         diceHolder.roll();
-
-        System.out.println("You rolled a " + diceHolder.toString());
+        game.showDice(diceHolder.getRolls());
+        game.movePlayer(player.getIdentifier(), diceHolder.sum() - 2);
         //Set the players new balance based on the fields effect
         //sum - 2 since 1, there's only 11 fields but you can roll two and arrays are 0-indexed so it goes 0-10
         player.setBalance(fields[diceHolder.sum()-2].getEffect());
-
-        System.out.println("The effect was "+ fields[diceHolder.sum()-2].getEffect() + " and your new balance is "+player.getBalance());
-
+        game.updatePlayer(player.getIdentifier(), player.getBalance());
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        game.RemovePlayer(diceHolder.sum()-2);
         return player;
     }
-
-    /*
-    private void updateFields(){
-        for (int i = 0; i < fields.length; i++) {
-            fields.setName()
-        }
-    }
-     */
 
 }
