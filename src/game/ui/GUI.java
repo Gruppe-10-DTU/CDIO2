@@ -1,16 +1,17 @@
 package game.ui;
 
-import game.buisness_logic.GameController;
+import game.controllers.GameController;
 import gui_fields.GUI_Board;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
 
-public class Game {
+public class GUI {
     GUI_Board gui;
 
     GameController gameController;
-    public Game(GUI_Field[] fields, GUI_Player[] players){
-        gui = new GUI_Board(fields);
+    public GUI(GUI_Field[] fields, GUI_Player[] players){
+        gameController = new GameController("en");
+        gui = new GUI_Board(gameController.getFields());
         for (GUI_Player player: players
              ) {
             gui.addPlayer(player);

@@ -2,26 +2,30 @@ package game.controllers;
 
 import game.models.*;
 import game.ui.GUI;
+import gui_fields.GUI_Field;
+import gui_fields.GUI_Player;
 
 public class GameController {
-    private final Player[] players = new Player[2];
-    Field[] fields = new Field[11];
     DiceHolder diceHolder = new DiceHolder();
     private GUIConverter guiConverter;
-
-    GUI GUI;
     /*
     Not implemented yet but will be needed
     Language language;
      */
     public GameController(String language){
+
+    }
+    public GUI_Player[] getPlayers(){
         players[0]=new Player("Player 1");
         players[1] = new Player("Player 2");
+        return guiConverter.playerToGUI(players);
+    }
+    public GUI_Field[] getFields(){
         int[] effects = new int[]{250, -100, 100,-20,180,0,-70,60,-80,-50,650};
         for (int i = 0; i < effects.length; i++) {
             fields[i] = new Field(effects[i], "Field " + i+2);
         }
-        GUI = new GUI(guiConverter.fieldToGui(fields), guiConverter.playerToGUI(players));
+        return guiConverter.fieldToGui(fields);
     }
     public void play() {
         //Variables for core loop
