@@ -42,15 +42,4 @@ public class Language {
         } catch (IOException e) {
         }
     }
-
-    public static void main(String Args[]) {
-        System.out.println("Program starts here");
-
-        Language currentLanguage = new Language();
-        System.out.println(currentLanguage.getLanguageValue("field2", "500"));
-        //currentLanguage.updateLanguage("src/game/danish.txt");
-        //System.out.println(currentLanguage.getLanguageValue("field2"));
-
-    }
-
 }
