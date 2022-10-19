@@ -65,8 +65,8 @@ public class GUI {
         //gui.updatePlayers();
         gui.getFields()[gameController.sum()].removeAllCars();
         gui.clearInputPanel();
-        gui.getUserInput(gameController.rollText(),rollButton);
-        gui.getUserInput("",languageMenu);
+        gui.getUserInput("",rollButton);
+        gui.getUserInput(gameController.rollText(),languageMenu);
     }
     public void updateFields(GUI_Field[] fields){
         GUI_Field[] gameFields = gui.getFields();

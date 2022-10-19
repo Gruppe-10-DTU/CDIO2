@@ -35,6 +35,7 @@ public class GameController {
         diceHolder.roll();
         return diceHolder.getRolls();
     }
+    //Turn function for the roll button
     public int turn(){
         Player player = players[turnCounter % 2];
         player.setBalance(fields[diceHolder.sum()-1].getEffect());
@@ -54,21 +55,26 @@ public class GameController {
     public String getActivePlayer(){
         return players[turnCounter%2].getIdentifier();
     }
+    //Get the text for the language button
     public String getLanguageButton() {
         return language.getLanguageValue("languageButton");
     }
     public GUI_Field[] updateFields(String newLanguage) {
+        //Set the new language
         language.updateLanguage(newLanguage);
+        //Update each field
         for (int i = 0; i < fields.length; i++) {
             fields[i].setName(language.getLanguageValue("fieldName"+(i+1)));
             fields[i].setDescription( language.getLanguageValue("field"+(i+1)));
         }
+        //Return the new fields, converted to GUI_Field
         return getFields();
     }
+    //Helper function for roll button
     public String getRollButton() {
         return language.getLanguageValue("rollButton");
     }
-
+    //Get the roll text
     public String rollText() {
         return language.getLanguageValue(players[turnCounter % 2].getIdentifier());
     }
