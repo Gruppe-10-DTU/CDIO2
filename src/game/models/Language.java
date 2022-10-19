@@ -17,10 +17,10 @@ public class Language {
     public Language(String language){
         String target;
         switch (language){
-            case "en":
+            case "English":
                 target = "src/game/english.txt";
                 break;
-            case "dk":
+            case "Danish":
                 target = "src/game/danish.txt";
                 break;
             default:
@@ -46,7 +46,19 @@ public class Language {
 
     //Updates the language
     public void updateLanguage(String language) {
-        Path path = Paths.get(language);
+        String target;
+        switch (language){
+            case "English":
+                target = "src/game/english.txt";
+                break;
+            case "Danish":
+                target = "src/game/danish.txt";
+                break;
+            default:
+                target = "src/game/english.txt";
+                break;
+        }
+        Path path = Paths.get(target);
         languageValues = new HashMap<String, String>();
         try {
             List<String> lines = Files.readAllLines(path);

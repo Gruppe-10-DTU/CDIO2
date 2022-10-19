@@ -26,3 +26,5 @@ fieldName11=The pit
 field11=You are caught stealing and thrown in the pit, you have to pay 50,- to settle your debt
 fieldName12=Goldmine
 field12=You came across a chest filled with gold, you gain 650,- hopefully the rightful owner doesn’t find you
+languageButton=Language
+rollButton=Kast

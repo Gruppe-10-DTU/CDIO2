@@ -10,15 +10,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static javax.swing.JOptionPane.*;
+
 public class GUI {
     GUI_Board gui;
     GameController gameController;
     private GUI_Board gui1;
     private Button waitButton;
     private Button rollButton;
+    private Button languageMenu;
 
-    public GUI(String language){
-        gameController = new GameController(language);
+    public GUI(){
+        gameController = new GameController();
         gui = new GUI_Board(gameController.getFields());
         for (GUI_Player player: gameController.getPlayers()
              ) {
@@ -38,6 +41,21 @@ public class GUI {
             }
         });
         gui.getUserInput("",rollButton);
+
+        languageMenu = new Button(gameController.getLanguageButton());
+        languageMenu.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                //TODO add function to see supported languaged
+                String[] list = new String[] {"English", "Danish"};
+                String language = (String) JOptionPane.showInputDialog(
+                    gui, "Please choose a language", "Language", QUESTION_MESSAGE,null,list,"English" );
+                updateFields(gameController.updateFields(language));
+                languageMenu.setLabel(gameController.getLanguageButton());
+                rollButton.setLabel(gameController.getRollButton());
+            }
+        });
+        gui.getUserInput("",languageMenu);
+
     }
     private void startTurn(){
         showDice(gameController.roll());

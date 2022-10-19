@@ -1,7 +1,6 @@
 package game.controllers;
 
 import game.models.*;
-import game.ui.GUI;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
 
@@ -16,8 +15,8 @@ public class GameController {
     private int turnCounter = 0;
     Language language;
 
-    public GameController(String language){
-        this.language = new Language(language);
+    public GameController(){
+        this.language = new Language();
         players = new Player[2];
         players[0]=new Player("Player 1");
         players[1] = new Player("Player 2");
@@ -43,7 +42,7 @@ public class GameController {
     }
     public int turn(){
         Player player = players[turnCounter % 2];
-        player.setBalance(fields[diceHolder.sum()-1].getEffect() + 3000);
+        player.setBalance(fields[diceHolder.sum()-1].getEffect());
         //Hvis balance < 3000 eller ikke rullet 10
         if(player.getBalance()<= WINCONDITION && diceHolder.sum()-2 != 10){
             turnCounter++;
@@ -59,5 +58,20 @@ public class GameController {
     }
     public String getActivePlayer(){
         return players[turnCounter%2].getIdentifier();
+    }
+
+    public String getLanguageButton() {
+        return language.getLanguageValue("languageButton");
+    }
+
+    public GUI_Field[] updateFields(String newLanguage) {
+        language.updateLanguage(newLanguage);
+        for (int i = 0; i < fields.length; i++) {
+            fields[i].updateFieldText(language.getLanguageValue("fieldName"+(i+1)), language.getLanguageValue("field"+(i+1)));
+        }
+        return guiConverter.fieldToGui(fields);
+    }
+    public String getRollButton() {
+        return language.getLanguageValue("rollButton");
     }
 }
