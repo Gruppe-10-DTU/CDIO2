@@ -8,64 +8,54 @@ import gui_fields.GUI_Player;
 public class GameController {
     DiceHolder diceHolder = new DiceHolder();
     private GUIConverter guiConverter;
-    /*
-    Not implemented yet but will be needed
-    Language language;
-     */
-    public GameController(String language){
 
-    }
-    public GUI_Player[] getPlayers(){
+    private Player[] players;
+    private Field[] fields;
+
+    private int turnCounter = 0;
+    Language language;
+
+    public GameController(String language){
+        this.language = new Language(language);
+        players = new Player[2];
         players[0]=new Player("Player 1");
         players[1] = new Player("Player 2");
+        fields = new Field[12];
+        int[] effects = new int[]{0,250, -100, 100,-20,180,0,-70,60,-80,-50,650};
+        for (int i = 0; i < effects.length; i++) {
+            fields[i] = new Field(effects[i], this.language.getLanguageValue("fieldName"+(i+1)), this.language.getLanguageValue("field"+(i+1)));
+        }
+    }
+    public String getFieldDescription(){
+        return fields[diceHolder.sum() - 1].getDescription();
+    }
+
+    public GUI_Player[] getPlayers(){
         return guiConverter.playerToGUI(players);
     }
     public GUI_Field[] getFields(){
-        int[] effects = new int[]{250, -100, 100,-20,180,0,-70,60,-80,-50,650};
-        for (int i = 0; i < effects.length; i++) {
-            fields[i] = new Field(effects[i], "Field " + i+2);
-        }
         return guiConverter.fieldToGui(fields);
     }
-    public void play() {
-        //Variables for core loop
-        boolean win = false;
-        int turn = 0;
-        //Main game logic
-        while(!win){
-
-            turn(players[turn % 2]);
-
-            if(players[turn % 2].getBalance() >= 3000){
-                win = true;
-            }
-            //If the player lands on The Werewall - field 10, they get an extra turn.
-            if(diceHolder.sum() != 10 || win){
-                turn++;
-            }
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        System.out.println("Player "+players[turn%2].getIdentifier() + " won");
-    }
-    private Player turn(Player player){
-        System.out.println(player.getIdentifier() + "s turn");
+    public int[] roll(){
         diceHolder.roll();
-        GUI.showDice(diceHolder.getRolls());
-        GUI.movePlayer(player.getIdentifier(), diceHolder.sum() - 2);
-        //Set the players new balance based on the fields effect
-        //sum - 2 since 1, there's only 11 fields but you can roll two and arrays are 0-indexed so it goes 0-10
-        player.setBalance(fields[diceHolder.sum()-2].getEffect());
-        GUI.updatePlayer(player.getIdentifier(), player.getBalance());
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        return diceHolder.getRolls();
+    }
+    public int turn(){
+        Player player = players[turnCounter % 2];
+        player.setBalance(fields[diceHolder.sum()-1].getEffect());
+        increaseTurn();
+        return player.getBalance();
+    }
+
+    public int sum(){
+        return diceHolder.sum() - 1;
+    }
+    public String getActivePlayer(){
+        return players[turnCounter%2].getIdentifier();
+    }
+    private void increaseTurn(){
+        if(diceHolder.sum() != 10){
+            turnCounter++;
         }
-        GUI.RemovePlayer(diceHolder.sum()-2);
-        return player;
     }
 }

@@ -13,7 +13,7 @@ public class GUIConverter {
     public static GUI_Field[] fieldToGui(Field[] fields){
         GUI_Field[] guiFields = new GUI_Field[fields.length];
         for (int i = 0; i < fields.length; i++) {
-            guiFields[i] = new GUI_Street(fields[i].getName(), "", "", Integer.toString(fields[i].getEffect()), Color.white, Color.black );
+            guiFields[i] = new GUI_Street(fields[i].getName(), "","beskrivelse", Integer.toString(fields[i].getEffect()), Color.white, Color.black );
         }
         return guiFields;
     }

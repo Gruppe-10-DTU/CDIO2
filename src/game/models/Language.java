@@ -1,4 +1,4 @@
-package game;
+package game.models;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,13 +7,27 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 
-
 public class Language {
 
     private HashMap<String, String> languageValues;
 
     public Language() {
         updateLanguage("src/game/english.txt");
+    }
+    public Language(String language){
+        String target;
+        switch (language){
+            case "en":
+                target = "src/game/english.txt";
+                break;
+            case "dk":
+                target = "src/game/danish.txt";
+                break;
+            default:
+                target = "src/game/english.txt";
+                break;
+        }
+        updateLanguage(target);
     }
 
     //Returns the value to the requestes key, kan add extra string if the value includes {0}
@@ -25,6 +39,9 @@ public class Language {
         } else {
             return languageValues.get(key);
         }
+    }
+    public String getLanguageValue(String key) {
+        return languageValues.get(key);
     }
 
     //Updates the language
