@@ -59,7 +59,11 @@ public class GUI {
         }
     }
     private void gameOver(String winner){
-        System.out.println(winner);
+        JOptionPane.showConfirmDialog(gui,
+                // TODO better text
+                // Valg mellem luk og reset eller kun luk?
+                winner + " vandt, tillykke!", "", JOptionPane.DEFAULT_OPTION);
+        System.exit(0);
     }
     private void endTurn(){
         //gui.updatePlayers();
