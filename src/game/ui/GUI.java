@@ -38,8 +38,6 @@ public class GUI {
             }
         });
         gui.getUserInput("",rollButton);
-        gui.setLocation(100,100);
-        gui.getComponentAt();
     }
     private void startTurn(){
         showDice(gameController.roll());
@@ -48,15 +46,21 @@ public class GUI {
         gui.getFields()[sum].setCar(tmp,true);
         gui.clearInputPanel();
         tmp.setBalance(gameController.turn());
-        gui.getUserInput(gameController.getFieldDescription(),waitButton);
+        if(gameController.hasWon()){
+            gameOver(gameController.getActivePlayer());
+        }else{
+            gui.getUserInput(gameController.getFieldDescription(),waitButton);
+        }
+    }
+    private void gameOver(String winner){
+        System.out.println(winner);
     }
     private void endTurn(){
-        gui.updatePlayers();
+        //gui.updatePlayers();
         gui.getFields()[gameController.sum()].removeAllCars();
         gui.clearInputPanel();
         gui.getUserInput(gameController.getActivePlayer() + " please roll",rollButton);
     }
-
     public void updateFields(GUI_Field[] fields){
         GUI_Field[] gameFields = gui.getFields();
         for (int i = 0; i < gameFields.length; i++) {

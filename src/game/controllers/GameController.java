@@ -8,6 +8,7 @@ import gui_fields.GUI_Player;
 public class GameController {
     DiceHolder diceHolder = new DiceHolder();
     private GUIConverter guiConverter;
+    private final int WINCONDITION = 3000;
 
     private Player[] players;
     private Field[] fields;
@@ -42,9 +43,15 @@ public class GameController {
     }
     public int turn(){
         Player player = players[turnCounter % 2];
-        player.setBalance(fields[diceHolder.sum()-1].getEffect());
-        increaseTurn();
+        player.setBalance(fields[diceHolder.sum()-1].getEffect() + 3000);
+        //Hvis balance < 3000 eller ikke rullet 10
+        if(player.getBalance()<= WINCONDITION && diceHolder.sum()-2 != 10){
+            turnCounter++;
+        }
         return player.getBalance();
+    }
+    public boolean hasWon(){
+        return players[turnCounter%2].getBalance() >= WINCONDITION;
     }
 
     public int sum(){
@@ -52,10 +59,5 @@ public class GameController {
     }
     public String getActivePlayer(){
         return players[turnCounter%2].getIdentifier();
-    }
-    private void increaseTurn(){
-        if(diceHolder.sum() != 10){
-            turnCounter++;
-        }
     }
 }
