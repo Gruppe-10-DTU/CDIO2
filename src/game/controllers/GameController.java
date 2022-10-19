@@ -6,7 +6,6 @@ import gui_fields.GUI_Player;
 
 public class GameController {
     DiceHolder diceHolder = new DiceHolder();
-    private GUIConverter guiConverter;
     private final int WINCONDITION = 3000;
 
     private Player[] players;
@@ -26,15 +25,11 @@ public class GameController {
             fields[i] = new Field(effects[i], this.language.getLanguageValue("fieldName"+(i+1)), this.language.getLanguageValue("field"+(i+1)));
         }
     }
-    public String getFieldDescription(){
-        return fields[diceHolder.sum() - 1].getDescription();
-    }
-
     public GUI_Player[] getPlayers(){
-        return guiConverter.playerToGUI(players);
+        return GUIConverter.playerToGUI(players);
     }
     public GUI_Field[] getFields(){
-        return guiConverter.fieldToGui(fields);
+        return GUIConverter.fieldToGui(fields);
     }
     public int[] roll(){
         diceHolder.roll();
@@ -43,7 +38,7 @@ public class GameController {
     public int turn(){
         Player player = players[turnCounter % 2];
         player.setBalance(fields[diceHolder.sum()-1].getEffect());
-        //Hvis balance < 3000 eller ikke rullet 10
+        //Hvis balance < 3000 og ikke rullet 10, øg tur
         if(player.getBalance()<= WINCONDITION && diceHolder.sum()-2 != 10){
             turnCounter++;
         }
@@ -59,19 +54,22 @@ public class GameController {
     public String getActivePlayer(){
         return players[turnCounter%2].getIdentifier();
     }
-
     public String getLanguageButton() {
         return language.getLanguageValue("languageButton");
     }
-
     public GUI_Field[] updateFields(String newLanguage) {
         language.updateLanguage(newLanguage);
         for (int i = 0; i < fields.length; i++) {
-            fields[i].updateFieldText(language.getLanguageValue("fieldName"+(i+1)), language.getLanguageValue("field"+(i+1)));
+            fields[i].setName(language.getLanguageValue("fieldName"+(i+1)));
+            fields[i].setDescription( language.getLanguageValue("field"+(i+1)));
         }
-        return guiConverter.fieldToGui(fields);
+        return getFields();
     }
     public String getRollButton() {
         return language.getLanguageValue("rollButton");
+    }
+
+    public String rollText() {
+        return language.getLanguageValue(players[turnCounter % 2].getIdentifier());
     }
 }

@@ -1,6 +1,7 @@
 isZero=Du har ikke flere penge
 options=Menu
 won={0} har vundet!
+start={0} kast med terningerne
 updateBalance=Din pengebeholdning er {0}
 fieldName1=Fængsel
 field1=Hvordan kom du herind?

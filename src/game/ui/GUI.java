@@ -7,19 +7,16 @@ import gui_fields.GUI_Player;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import static javax.swing.JOptionPane.*;
 
 public class GUI {
     GUI_Board gui;
     GameController gameController;
-    private GUI_Board gui1;
     private Button waitButton;
     private Button rollButton;
     private Button languageMenu;
 
+    //TODO better way to show buttons
     public GUI(){
         gameController = new GameController();
         gui = new GUI_Board(gameController.getFields());
@@ -28,31 +25,21 @@ public class GUI {
             gui.addPlayer(player);
         }
         waitButton = new Button("Ok");
-        waitButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                endTurn();
-            }
-        });
+        waitButton.addActionListener(e -> endTurn());
         rollButton = new Button("Roll");
         rollButton.setBounds(0,0,50,20);
-        rollButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                startTurn();
-            }
-        });
+        rollButton.addActionListener(e -> startTurn());
         gui.getUserInput("",rollButton);
 
         languageMenu = new Button(gameController.getLanguageButton());
-        languageMenu.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                //TODO add function to see supported languaged
-                String[] list = new String[] {"English", "Danish"};
-                String language = (String) JOptionPane.showInputDialog(
-                    gui, "Please choose a language", "Language", QUESTION_MESSAGE,null,list,"English" );
-                updateFields(gameController.updateFields(language));
-                languageMenu.setLabel(gameController.getLanguageButton());
-                rollButton.setLabel(gameController.getRollButton());
-            }
+        languageMenu.addActionListener(e -> {
+            //TODO add function to see supported language
+            String[] list = new String[] {"English", "Danish"};
+            String language = (String) JOptionPane.showInputDialog(
+                gui, "Please choose a language", "Language", QUESTION_MESSAGE,null,list,"English" );
+            updateFields(gameController.updateFields(language));
+            languageMenu.setLabel(gameController.getLanguageButton());
+            rollButton.setLabel(gameController.getRollButton());
         });
         gui.getUserInput("",languageMenu);
 
@@ -67,7 +54,8 @@ public class GUI {
         if(gameController.hasWon()){
             gameOver(gameController.getActivePlayer());
         }else{
-            gui.getUserInput(gameController.getFieldDescription(),waitButton);
+            gui.getUserInput("",waitButton);
+            gui.getUserInput(gui.getFields()[sum].getDescription(),languageMenu);
         }
     }
     private void gameOver(String winner){
@@ -77,7 +65,8 @@ public class GUI {
         //gui.updatePlayers();
         gui.getFields()[gameController.sum()].removeAllCars();
         gui.clearInputPanel();
-        gui.getUserInput(gameController.getActivePlayer() + " please roll",rollButton);
+        gui.getUserInput(gameController.rollText(),rollButton);
+        gui.getUserInput("",languageMenu);
     }
     public void updateFields(GUI_Field[] fields){
         GUI_Field[] gameFields = gui.getFields();
