@@ -29,19 +29,21 @@ public class GUI {
         rollButton = new Button("Roll");
         rollButton.setBounds(0,0,50,20);
         rollButton.addActionListener(e -> startTurn());
-        gui.getUserInput("",rollButton);
 
         languageMenu = new Button(gameController.getLanguageButton());
         languageMenu.addActionListener(e -> {
             //TODO add function to see supported language
             String[] list = new String[] {"English", "Danish"};
+            //TODO look for button
             String language = (String) JOptionPane.showInputDialog(
                 gui, "Please choose a language", "Language", QUESTION_MESSAGE,null,list,"English" );
             updateFields(gameController.updateFields(language));
             languageMenu.setLabel(gameController.getLanguageButton());
             rollButton.setLabel(gameController.getRollButton());
+            gui.clearInputPanel();
+            gui.getUserInput(gameController.rollText(),rollButton,languageMenu);
         });
-        gui.getUserInput("",languageMenu);
+        gui.getUserInput(gameController.rollText(),rollButton,languageMenu);
 
     }
     private void startTurn(){
@@ -54,8 +56,7 @@ public class GUI {
         if(gameController.hasWon()){
             gameOver(gameController.getActivePlayer());
         }else{
-            gui.getUserInput("",waitButton);
-            gui.getUserInput(gui.getFields()[sum].getDescription(),languageMenu);
+            gui.getUserInput(gui.getFields()[sum].getDescription(),waitButton);
         }
     }
     private void gameOver(String winner){
@@ -69,8 +70,7 @@ public class GUI {
         //gui.updatePlayers();
         gui.getFields()[gameController.sum()].removeAllCars();
         gui.clearInputPanel();
-        gui.getUserInput("",rollButton);
-        gui.getUserInput(gameController.rollText(),languageMenu);
+        gui.getUserInput(gameController.rollText(),rollButton,languageMenu);
     }
     public void updateFields(GUI_Field[] fields){
         GUI_Field[] gameFields = gui.getFields();

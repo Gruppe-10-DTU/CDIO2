@@ -76,6 +76,6 @@ public class GameController {
     }
     //Get the roll text
     public String rollText() {
-        return language.getLanguageValue(players[turnCounter % 2].getIdentifier());
+        return language.getLanguageValue("start",players[turnCounter % 2].getIdentifier());
     }
 }
