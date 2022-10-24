@@ -6,8 +6,7 @@ public class Start {
     // Diceholder til controller?
     // Language Controller?
     // Lokation af .txt fil?
-    // Placering af helper function?
-    //
+
     public static void main(String[] args) {
         GUI miniMonopoly = new GUI();
     }

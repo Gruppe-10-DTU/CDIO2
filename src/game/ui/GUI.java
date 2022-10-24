@@ -34,7 +34,6 @@ public class GUI {
         languageMenu.addActionListener(e -> {
             //TODO add function to see supported language
             String[] list = new String[] {"English", "Danish"};
-            //TODO look for button
             String language = (String) JOptionPane.showInputDialog(
                 gui, "Please choose a language", "Language", QUESTION_MESSAGE,null,list,"English" );
             updateFields(gameController.updateFields(language));
@@ -53,6 +52,7 @@ public class GUI {
         gui.getFields()[sum].setCar(tmp,true);
         gui.clearInputPanel();
         tmp.setBalance(gameController.turn());
+        //TODO change new button to wait for input
         if(gameController.hasWon()){
             gameOver(gameController.getActivePlayer());
         }else{

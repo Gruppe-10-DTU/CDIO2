@@ -32,13 +32,9 @@ public class Language {
 
     //Returns the value to the requestes key, kan add extra string if the value includes {0}
     public String getLanguageValue(String key, String...txt) {
-        if(txt.length>0) {
-            String value = languageValues.get(key);
-            value = value.replace("{0}", txt[0]);
-            return value;
-        } else {
-            return languageValues.get(key);
-        }
+        String value = languageValues.get(key);
+        value = value.replace("{0}", txt[0]);
+        return value;
     }
     public String getLanguageValue(String key) {
         return languageValues.get(key);
