@@ -1,5 +1,6 @@
 package game.ui;
 
+import game.controllers.GUIConverter;
 import game.controllers.GameController;
 import gui_fields.GUI_Board;
 import gui_fields.GUI_Field;
@@ -19,8 +20,8 @@ public class GUI {
     //TODO better way to show buttons
     public GUI(){
         gameController = new GameController();
-        gui = new GUI_Board(gameController.getFields());
-        for (GUI_Player player: gameController.getPlayers()
+        gui = new GUI_Board(GUIConverter.fieldToGui(gameController.getFields()));
+        for (GUI_Player player: GUIConverter.playerToGUI(gameController.getPlayers())
              ) {
             gui.addPlayer(player);
         }
@@ -35,14 +36,14 @@ public class GUI {
             //TODO add function to see supported language
             String[] list = new String[] {"English", "Danish"};
             String language = (String) JOptionPane.showInputDialog(
-                gui, "Please choose a language", "Language", QUESTION_MESSAGE,null,list,"English" );
-            updateFields(gameController.updateFields(language));
+                gui, gameController.getLanguageText(), gameController.getLanguageButton(), QUESTION_MESSAGE,null,list,"English" );
+            updateFields(GUIConverter.fieldToGui(gameController.updateFields(language)));
             languageMenu.setLabel(gameController.getLanguageButton());
             rollButton.setLabel(gameController.getRollButton());
             gui.clearInputPanel();
-            gui.getUserInput(gameController.rollText(),rollButton,languageMenu);
+            gui.getUserInput(gameController.getRollText(),rollButton,languageMenu);
         });
-        gui.getUserInput(gameController.rollText(),rollButton,languageMenu);
+        gui.getUserInput(gameController.getRollText(),rollButton,languageMenu);
 
     }
     private void startTurn(){
@@ -70,7 +71,7 @@ public class GUI {
         //gui.updatePlayers();
         gui.getFields()[gameController.sum()].removeAllCars();
         gui.clearInputPanel();
-        gui.getUserInput(gameController.rollText(),rollButton,languageMenu);
+        gui.getUserInput(gameController.getRollText(),rollButton,languageMenu);
     }
     public void updateFields(GUI_Field[] fields){
         GUI_Field[] gameFields = gui.getFields();

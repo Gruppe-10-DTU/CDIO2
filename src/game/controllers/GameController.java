@@ -1,8 +1,6 @@
 package game.controllers;
 
 import game.models.*;
-import gui_fields.GUI_Field;
-import gui_fields.GUI_Player;
 
 public class GameController {
     DiceHolder diceHolder = new DiceHolder();
@@ -12,7 +10,7 @@ public class GameController {
     private Field[] fields;
 
     private int turnCounter = 0;
-    Language language;
+    private Language language;
 
     public GameController(){
         this.language = new Language();
@@ -25,11 +23,11 @@ public class GameController {
             fields[i] = new Field(effects[i], this.language.getLanguageValue("fieldName"+(i+1)), this.language.getLanguageValue("field"+(i+1)));
         }
     }
-    public GUI_Player[] getPlayers(){
-        return GUIConverter.playerToGUI(players);
+    public Player[] getPlayers(){
+        return players;
     }
-    public GUI_Field[] getFields(){
-        return GUIConverter.fieldToGui(fields);
+    public Field[] getFields(){
+        return fields;
     }
     public int[] roll(){
         diceHolder.roll();
@@ -59,7 +57,7 @@ public class GameController {
     public String getLanguageButton() {
         return language.getLanguageValue("languageButton");
     }
-    public GUI_Field[] updateFields(String newLanguage) {
+    public Field[] updateFields(String newLanguage) {
         //Set the new language
         language.updateLanguage(newLanguage);
         //Update each field
@@ -75,7 +73,11 @@ public class GameController {
         return language.getLanguageValue("rollButton");
     }
     //Get the roll text
-    public String rollText() {
+    public String getRollText() {
         return language.getLanguageValue("start",players[turnCounter % 2].getIdentifier());
+    }
+
+    public Object getLanguageText() {
+        return language.getLanguageValue("LanguageManuText");
     }
 }
