@@ -1,4 +1,4 @@
-isZero=You are out of money
+isZero=You went into negative balance but are at 0.
 options=options
 won={0} has won!
 start={0} roll the dice

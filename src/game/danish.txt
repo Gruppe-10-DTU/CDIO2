@@ -1,4 +1,4 @@
-isZero=Du har ikke flere penge
+isZero=Du gik i negativ, men blev "reddet" og har 0
 options=Menu
 won={0} har vundet!
 start={0} kast med terningerne
