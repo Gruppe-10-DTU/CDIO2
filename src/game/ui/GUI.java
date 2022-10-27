@@ -2,6 +2,7 @@ package game.ui;
 
 import game.controllers.GUIConverter;
 import game.controllers.GameController;
+import game.models.Player;
 import gui_fields.GUI_Board;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
@@ -49,15 +50,21 @@ public class GUI {
     private void startTurn(){
         showDice(gameController.roll());
         int sum = gameController.sum();
-        GUI_Player tmp = gui.getPlayer(gameController.getActivePlayer());
-        gui.getFields()[sum].setCar(tmp,true);
+        boolean successTurn = gameController.turn();
+        Player player = gameController.getActivePlayer();
+        GUI_Player guiPlayer = gui.getPlayer(player.getIdentifier());
+        gui.getFields()[sum].setCar(guiPlayer,true);
         gui.clearInputPanel();
-        tmp.setBalance(gameController.turn());
         //TODO change new button to wait for input
         if(gameController.hasWon()){
-            gameOver(gameController.getActivePlayer());
+            gameOver(player.getIdentifier());
         }else{
-            gui.getUserInput(gui.getFields()[sum].getDescription(),waitButton);
+            guiPlayer.setBalance(player.getBalance());
+            if(successTurn){
+                gui.getUserInput(gui.getFields()[sum].getDescription(),waitButton);
+            }else{
+                gui.getUserInput((gui.getFields()[sum].getDescription() + "\r\n" + gameController.noMoney()),waitButton);
+            }
         }
     }
     private void gameOver(String winner){
@@ -82,6 +89,6 @@ public class GUI {
         }
     }
     private void showDice(int[] dice){
-        gui.setDice(4, 1, dice[0],0,5, 1, dice[1],0);
+        gui.setDice(4, 2, dice[0],0,5, 2, dice[1],0);
     }
 }
