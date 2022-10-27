@@ -1,4 +1,6 @@
-package game;
+package Test;
+
+import game.models.Language;
 
 import static org.junit.jupiter.api.Assertions.*;
 
