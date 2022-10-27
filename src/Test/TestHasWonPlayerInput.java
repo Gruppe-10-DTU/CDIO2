@@ -13,7 +13,7 @@ class TestHasWonPlayerInput {
             //Instanciate the relevant classes
             GameController gc = new GameController();
             Player[] players = new Player[2];
-            players[0] = new Player("test");
+            players[0] = new Player("Test");
             //Get the class
             Class c = gc.getClass();
 
