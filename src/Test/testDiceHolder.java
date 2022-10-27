@@ -6,6 +6,7 @@ public class testDiceHolder extends game.models.DiceHolder{
         this.sum = sum;
     }
 
+
     @Override
     public int sum(){
         return this.sum;

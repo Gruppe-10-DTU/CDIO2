@@ -29,6 +29,7 @@ class turnTest {
             fieldDice.setAccessible(true);
             fieldDice.set(gc,diceHolder);
 
+
             //Player 1
             assertEquals(0, gc.getTurnCounter());
             players[gc.getTurnCounter() % 2].setBalance(1999);
@@ -53,7 +54,7 @@ class turnTest {
             diceHolder.setSum(3);
             players[gc.getTurnCounter() % 2].setBalance(1);
             assertEquals(2,gc.getTurnCounter());
-            //Player 1 cause he won
+            //Player 1 because he won
             gc.turn();
             assertEquals(2,gc.getTurnCounter());
 
