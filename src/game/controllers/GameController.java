@@ -31,14 +31,14 @@ public class GameController {
         return diceHolder.getRolls();
     }
     //Turn function for the roll button
-    public int turn(){
+    public boolean turn(){
         Player player = players[turnCounter % 2];
-        player.setBalance(fields[diceHolder.sum()-1].getEffect());
+        boolean returnValue = player.setBalance(fields[diceHolder.sum()-2].getEffect());
         //If the player hasn't won and didn't roll 10, increase the turn
-        if(hasWon() && diceHolder.sum() != 10){
+        if(!hasWon() && diceHolder.sum() != 10){
             turnCounter++;
         }
-        return player.getBalance();
+        return returnValue;
     }
     public boolean hasWon(){
         return players[turnCounter%2].getBalance() >= WINCONDITION;
@@ -46,8 +46,8 @@ public class GameController {
     public int sum(){
         return diceHolder.sum() - 1;
     }
-    public String getActivePlayer(){
-        return players[turnCounter%2].getIdentifier();
+    public Player getActivePlayer(){
+        return players[turnCounter%2];
     }
     //Get the text for the language button
     public String getLanguageButton() {
@@ -75,5 +75,9 @@ public class GameController {
 
     public Object getLanguageText() {
         return language.getLanguageValue("LanguageManuText");
+    }
+
+    public String noMoney() {
+        return language.getLanguageValue("isZero");
     }
 }
