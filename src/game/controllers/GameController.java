@@ -5,13 +5,10 @@ import game.models.*;
 public class GameController {
     DiceHolder diceHolder = new DiceHolder();
     private final int WINCONDITION = 3000;
-
     private Player[] players;
     private Field[] fields;
-
     private int turnCounter = 0;
     private Language language;
-
     public GameController(){
         this.language = new Language();
         players = new Player[2];
@@ -37,8 +34,8 @@ public class GameController {
     public int turn(){
         Player player = players[turnCounter % 2];
         player.setBalance(fields[diceHolder.sum()-1].getEffect());
-        //Hvis balance < 3000 og ikke rullet 10, øg tur
-        if(player.getBalance()<= WINCONDITION && diceHolder.sum()-2 != 10){
+        //If the player hasn't won and didn't roll 10, increase the turn
+        if(hasWon() && diceHolder.sum() != 10){
             turnCounter++;
         }
         return player.getBalance();
@@ -46,7 +43,6 @@ public class GameController {
     public boolean hasWon(){
         return players[turnCounter%2].getBalance() >= WINCONDITION;
     }
-
     public int sum(){
         return diceHolder.sum() - 1;
     }
