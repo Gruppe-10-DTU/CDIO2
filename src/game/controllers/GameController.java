@@ -80,4 +80,7 @@ public class GameController {
     public String noMoney() {
         return language.getLanguageValue("isZero");
     }
+    public Integer getTurnCounter() {
+        return turnCounter;
+    }
 }
