@@ -1,0 +1,8 @@
+To run this project from github, follow this manual:
+
+Step 1: Download the files from github on the main branch
+Step 2: Unpack the files into a normal folder.
+Step 3: Go into the src folder and run build.bat. This will compile and build an executable jar file.
+Step 4: Double-click the jar file to execute and run the program.
+
+You can now move the minimonopoly.jar file out of the folder and run it anywhere on your pc.

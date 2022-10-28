@@ -30,6 +30,7 @@ class TestHasWonPlayerInput {
             players[0].setBalance(1);
             assertTrue(gc.hasWon());
         }catch (Exception e){
+            System.out.println("Error");
         }
     }
 }
