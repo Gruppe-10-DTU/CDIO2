@@ -1,4 +1,4 @@
-To run this project from github, follow this manual:
+To run this project from github, on a windows pc with java 13+, follow this manual:
 
 Step 1: Download the files from github on the main branch
 Step 2: Unpack the files into a normal folder.
